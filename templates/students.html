@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Student Total Marks</title>
+<style>
+  /* Reset & basics */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0; 
+    font-family: Arial, sans-serif;
+    background: #f9f9f9;
+    color: #004080;
+  }
+
+  /* Navbar */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #004080;
+    padding: 12px 24px;
+    color: white;
+    position: relative;
+  }
+
+  /* Brand */
+  .brand {
+    font-weight: 700;
+    font-size: 1.4rem;
+    user-select: none;
+    white-space: nowrap;
+  }
+
+  /* Filter container */
+  .filter-container {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  /* Radio group */
+  .filter-radios {
+    display: flex;
+    gap: 12px;
+    white-space: nowrap;
+  }
+
+  .filter-radios label {
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .filter-radios input[type="radio"] {
+    cursor: pointer;
+  }
+
+  /* Search input */
+  .filter-search {
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: none;
+    font-size: 1rem;
+    width: 140px;
+  }
+
+  /* Filter button */
+  .filter-button {
+    background-color: #0066cc;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+  }
+  .filter-button:hover {
+    background-color: #004d99;
+  }
+
+  /* About link */
+  .about-link {
+    color: white;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+    user-select: none;
+    white-space: nowrap;
+  }
+  .about-link:hover {
+    border-color: white;
+  }
+
+  /* Hamburger menu button (hidden on desktop) */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+    user-select: none;
+    width: 25px;
+    height: 20px;
+  }
+  .hamburger div {
+    background: white;
+    height: 3px;
+    border-radius: 2px;
+  }
+
+  /* Mobile styles */
+  @media (max-width: 700px) {
+    /* Hide filter container by default */
+    .filter-container {
+      display: none;
+      flex-direction: column;
+      background: #004080;
+      position: absolute;
+      top: 56px;
+      right: 0;
+      width: 100%;
+      max-width: 320px;
+      padding: 16px 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      border-radius: 0 0 8px 8px;
+      z-index: 20;
+    }
+    /* Show filter container when active */
+    .filter-container.active {
+      display: flex;
+    }
+    /* Stack radios vertically on mobile */
+    .filter-radios {
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    /* Make search input full width */
+    .filter-search {
+      width: 100%;
+      margin-bottom: 12px;
+    }
+    /* Make button full width */
+    .filter-button {
+      width: 100%;
+      padding: 10px 0;
+    }
+    /* Show hamburger */
+    .hamburger {
+      display: flex;
+    }
+  }
+
+  /* Table styling (unchanged) */
+  h2 {
+    text-align: center;
+    margin: 25px 0 15px;
+    color: #004080;
+    font-weight: 700;
+  }
+  table {
+    border-collapse: collapse; 
+    width: 90%; 
+    margin: 0 auto 40px;
+    background: #fff;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  th, td { 
+    border: 1px solid #ddd; 
+    padding: 12px; 
+    text-align: center;
+    font-size: 1em;
+  }
+  th { 
+    background-color: #e6f0ff; 
+    color: #004080;
+    font-weight: 700;
+  }
+  tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  .highlight {
+    background-color: #fff3b0 !important;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">Board Result Chattogram</div>
+
+  <div class="filter-container" id="filterContainer">
+    <form method="get" id="filterForm" style="display: flex; flex-wrap: wrap; gap: 15px; align-items: center; width: 100%;">
+      <div class="filter-radios">
+        <label><input type="radio" name="group" value="all" {% if selected_group == 'all' %}checked{% endif %}> All</label>
+        <label><input type="radio" name="group" value="Science" {% if selected_group == 'Science' %}checked{% endif %}> Science</label>
+        <label><input type="radio" name="group" value="Business Studies" {% if selected_group == 'Business Studies' %}checked{% endif %}> Commerce</label>
+        <label><input type="radio" name="group" value="Humanities" {% if selected_group == 'Humanities' %}checked{% endif %}> Humanities</label>
+      </div>
+
+      <input type="text" name="roll" placeholder="Enter Roll" value="{{ search_roll }}" class="filter-search" />
+
+      <button type="submit" class="filter-button">Filter/Search</button>
+    </form>
+  </div>
+
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle filter menu" title="Filter options">
+    <div></div><div></div><div></div>
+  </button>
+
+  <a href="/about" class="about-link" title="About this app">About</a>
+</nav>
+
+<h2>Total Marks by Student</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Rank</th>
+      <th>Roll</th>
+      <th>Group</th>
+      <th>GPA</th>
+      <th>Total Marks</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for student in students %}
+    <tr {% if student.roll == search_roll %} class="highlight" {% endif %}>
+      <td>{{ student.rank }}</td>
+      <td>{{ student.roll }}</td>
+      <td>{{ student.group }}</td>
+      <td>{{ student.gpa }}</td>
+      <td>{{ student.total_marks }}</td>
+    </tr>
+    {% else %}
+    <tr><td colspan="5">No students found.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const filterContainer = document.getElementById('filterContainer');
+
+  hamburgerBtn.addEventListener('click', () => {
+    filterContainer.classList.toggle('active');
+  });
+
+  // Close filter menu if clicked outside
+  document.addEventListener('click', (e) => {
+    if (!filterContainer.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+      filterContainer.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
