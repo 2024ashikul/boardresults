@@ -1,9 +1,12 @@
 from flask import Flask, render_template, request
 import sqlite3
 import math
+import os
 
 app = Flask(__name__)
 
+port = int(os.environ.get("PORT", 10000))
+app.run(host='0.0.0.0', port=port)
 
 subject_id_name_map = {
     '101': 'Bangla',
