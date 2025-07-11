@@ -27,7 +27,6 @@
     position: relative;
   }
 
-  /* Brand */
   .brand {
     font-weight: 700;
     font-size: 1.4rem;
@@ -35,14 +34,12 @@
     white-space: nowrap;
   }
 
-  /* Filter container */
   .filter-container {
     display: flex;
     align-items: center;
     gap: 18px;
   }
 
-  /* Radio group */
   .filter-radios {
     display: flex;
     gap: 12px;
@@ -62,7 +59,6 @@
     cursor: pointer;
   }
 
-  /* Search input */
   .filter-search {
     padding: 6px 10px;
     border-radius: 4px;
@@ -71,7 +67,6 @@
     width: 140px;
   }
 
-  /* Filter button */
   .filter-button {
     background-color: #0066cc;
     border: none;
@@ -87,7 +82,6 @@
     background-color: #004d99;
   }
 
-  /* About link */
   .about-link {
     color: white;
     font-weight: 700;
@@ -103,7 +97,6 @@
     border-color: white;
   }
 
-  /* Hamburger menu button (hidden on desktop) */
   .hamburger {
     display: none;
     flex-direction: column;
@@ -119,9 +112,20 @@
     border-radius: 2px;
   }
 
-  /* Mobile styles */
+  .search-icon {
+    display: none;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-left: 10px;
+    user-select: none;
+    padding: 0;
+    line-height: 1;
+  }
+
   @media (max-width: 700px) {
-    /* Hide filter container by default */
     .filter-container {
       display: none;
       flex-direction: column;
@@ -136,39 +140,59 @@
       border-radius: 0 0 8px 8px;
       z-index: 20;
     }
-    /* Show filter container when active */
     .filter-container.active {
       display: flex;
     }
-    /* Stack radios vertically on mobile */
     .filter-radios {
       flex-direction: column;
       gap: 10px;
       margin-bottom: 12px;
     }
-    /* Make search input full width */
     .filter-search {
       width: 100%;
       margin-bottom: 12px;
     }
-    /* Make button full width */
     .filter-button {
       width: 100%;
       padding: 10px 0;
     }
-    /* Show hamburger */
     .hamburger {
       display: flex;
     }
+    .search-icon {
+      display: block;
+    }
   }
 
-  /* Table styling (unchanged) */
   h2 {
     text-align: center;
     margin: 25px 0 15px;
     color: #004080;
     font-weight: 700;
   }
+
+  /* Disclaimer */
+  .disclaimer {
+    width: 90%;
+    margin: 10px auto 25px;
+    padding: 15px 20px;
+    background-color: #fff8e1;
+    border-left: 6px solid #ffa000;
+    color: #333;
+    font-size: 1rem;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+
+  .disclaimer ol {
+    margin: 10px 0 0 20px;
+    padding: 0;
+  }
+
+  .disclaimer strong {
+    color: #d17b00;
+  }
+
   table {
     border-collapse: collapse; 
     width: 90%; 
@@ -222,17 +246,30 @@
     <div></div><div></div><div></div>
   </button>
 
+  <button class="search-icon" id="searchIconBtn" aria-label="Toggle search" title="Search">
+    🔍
+  </button>
+
   <a href="/about" class="about-link" title="About this app">About</a>
 </nav>
 
 <h2>Total Marks by Student</h2>
+
+<div class="disclaimer">
+  <strong>Please note:</strong>
+  <ol>
+    <li>Everyone's marks are increased by <strong>150</strong> from the original marks.</li>
+    <li>Only <strong>Chattogram District</strong> results are shown. Other 4 districts will be added soon.</li>
+  </ol>
+</div>
+
 <table>
   <thead>
     <tr>
       <th>Rank</th>
       <th>Roll</th>
       <th>Group</th>
-      <th>School</th>
+      <!-- <th>School</th> -->
       <th>GPA</th>
       <th>Total Marks</th>
     </tr>
@@ -243,7 +280,7 @@
       <td>{{ student.rank }}</td>
       <td>{{ student.roll }}</td>
       <td>{{ student.group }}</td>
-      <td>{{ student.school_name }}</td>
+      <!-- <td>{{ student.school_name }}</td> -->
       <td>{{ student.gpa }}</td>
       <td>{{ student.total_marks }}</td>
     </tr>
@@ -256,14 +293,20 @@
 <script>
   const hamburgerBtn = document.getElementById('hamburgerBtn');
   const filterContainer = document.getElementById('filterContainer');
+  const searchIconBtn = document.getElementById('searchIconBtn');
 
   hamburgerBtn.addEventListener('click', () => {
     filterContainer.classList.toggle('active');
   });
 
-  // Close filter menu if clicked outside
+  searchIconBtn.addEventListener('click', () => {
+    filterContainer.classList.toggle('active');
+  });
+
   document.addEventListener('click', (e) => {
-    if (!filterContainer.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+    if (!filterContainer.contains(e.target) && 
+        !hamburgerBtn.contains(e.target) && 
+        !searchIconBtn.contains(e.target)) {
       filterContainer.classList.remove('active');
     }
   });

@@ -12,46 +12,45 @@ def show_student_totals():
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
 
-    # Get subject columns only (exclude metadata)
+    # Get subject columns (excluding non-marks fields)
     cursor.execute("PRAGMA table_info(students);")
-    columns = [col[1] for col in cursor.fetchall() if col[1] not in ('roll', 'gpa', 'group_name', 'school_name', 'board', 'zilla', 'thana')]
+    columns = [col[1] for col in cursor.fetchall() if col[1] not in (
+        'roll', 'gpa', 'group_name', 'school_name', 'board', 'zilla', 'thana')]
 
-    # Get all student rows
-    cursor.execute("SELECT * FROM students;")
-    rows = cursor.fetchall()
-    conn.close()
+    # Step 1: Fetch all GPA 5 students
+    cursor.execute("SELECT * FROM students WHERE gpa = 5.0")
+    all_rows = cursor.fetchall()
 
-    students = []
-    for row in rows:
-        total = 0
-        for col in columns:
-            try:
-                val = float(row[col]) if row[col] else 0
-                total += val
-            except ValueError:
-                pass
-        students.append({
+    all_students = []
+    for row in all_rows:
+        total = sum(float(row[col] or 0) for col in columns)
+        all_students.append({
             'roll': row['roll'],
             'gpa': row['gpa'],
             'group': row['group_name'],
             'school_name': row['school_name'],
-            'total_marks': round(total, 2) + 150  # extra fixed marks
+            'total_marks': round(total, 2) + 150  # Apply +150
         })
 
-    # Apply filters
-    if selected_group.lower() != 'all':
-        students = [s for s in students if s['group'] == selected_group]
-    if search_roll:
-        students = [s for s in students if s['roll'] == search_roll]
-
-    # Sort and rank
-    students.sort(key=lambda x: x['total_marks'], reverse=True)
-    for idx, student in enumerate(students, start=1):
+    # Step 2: Rank all students globally
+    all_students.sort(key=lambda x: x['total_marks'], reverse=True)
+    roll_to_rank = {}
+    for idx, student in enumerate(all_students, start=1):
         student['rank'] = idx
+        roll_to_rank[student['roll']] = student
+
+    # Step 3: Apply filters for final display
+    filtered_students = []
+    for student in all_students:
+        if selected_group.lower() != 'all' and student['group'] != selected_group:
+            continue
+        if search_roll and str(student['roll']) != search_roll:
+            continue
+        filtered_students.append(student)
 
     return render_template(
         "students.html",
-        students=students,
+        students=filtered_students,
         search_roll=search_roll,
         selected_group=selected_group
     )
