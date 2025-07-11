@@ -148,7 +148,7 @@ def student_result(roll):
 
     return render_template('student_result.html', student=student)
 
-@app.route('./about')
+@app.route('/about')
 def about():
     render_template('about.html')
 
