@@ -151,7 +151,7 @@ def student_result(roll):
 
 @app.route('/about')
 def about():
-    render_template('about.htm')
+    return render_template('about.htm')
 
 if __name__ == "__main__":
     import os
