@@ -4,8 +4,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>Chattogram Board HSC Result 2025 - Student Rank, GPA & Marks</title>
   <meta name="description"
@@ -28,43 +26,8 @@
   <meta name="twitter:description" content="Explore student GPA, marks and ranks for HSC 2025 Chattogram Board.">
   <meta name="twitter:image" content="https://yourdomain.com/static/og-image.jpg">
 
-  <!-- JSON-LD Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Dataset",
-    "name": "Chattogram Board HSC Results 2025",
-    "description": "Student results dataset showing roll numbers, group, GPA, and total marks for HSC 2025 in Chattogram District.",
-    "url": "https://yourdomain.com/results",
-    "creator": {
-      "@type": "Organization",
-      "name": "Board Result Chattogram"
-    },
-    "keywords": [
-      "Chattogram HSC Result",
-      "Board Rank 2025",
-      "Total Marks HSC",
-      "HSC GPA List 2025"
-    ],
-    "distribution": {
-      "@type": "DataDownload",
-      "encodingFormat": "CSV",
-      "contentUrl": "https://yourdomain.com/data/results.csv"
-    }
-  }
-  </script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZBQB48DQ4B"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-ZBQB48DQ4B');
-</script>
-
-  <title>Student Total Marks</title>
   <style>
-    /* Reset & basics */
+    /* Basic Reset */
     * {
       box-sizing: border-box;
     }
@@ -76,7 +39,6 @@
       color: #004080;
     }
 
-    /* Navbar */
     nav {
       display: flex;
       align-items: center;
@@ -90,8 +52,6 @@
     .brand {
       font-weight: 700;
       font-size: 1.4rem;
-      user-select: none;
-      white-space: nowrap;
     }
 
     .filter-container {
@@ -103,19 +63,10 @@
     .filter-radios {
       display: flex;
       gap: 12px;
-      white-space: nowrap;
     }
 
     .filter-radios label {
-      cursor: pointer;
       font-weight: 600;
-      user-select: none;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .filter-radios input[type="radio"] {
       cursor: pointer;
     }
 
@@ -135,8 +86,6 @@
       color: white;
       font-weight: 600;
       cursor: pointer;
-      transition: background-color 0.3s ease;
-      white-space: nowrap;
     }
 
     .filter-button:hover {
@@ -147,45 +96,11 @@
       color: white;
       font-weight: 700;
       text-decoration: none;
-      padding: 8px 15px;
-      border-radius: 5px;
-      border: 2px solid transparent;
-      transition: border-color 0.3s ease;
-      user-select: none;
-      white-space: nowrap;
     }
 
-    .about-link:hover {
-      border-color: white;
-    }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 4px;
-      cursor: pointer;
-      user-select: none;
-      width: 25px;
-      height: 20px;
-    }
-
-    .hamburger div {
-      background: white;
-      height: 3px;
-      border-radius: 2px;
-    }
-
+    .hamburger,
     .search-icon {
       display: none;
-      background: transparent;
-      border: none;
-      color: white;
-      font-size: 1.5rem;
-      cursor: pointer;
-      margin-left: 10px;
-      user-select: none;
-      padding: 0;
-      line-height: 1;
     }
 
     @media (max-width: 700px) {
@@ -199,7 +114,6 @@
         width: 100%;
         max-width: 320px;
         padding: 16px 20px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         border-radius: 0 0 8px 8px;
         z-index: 20;
       }
@@ -208,28 +122,26 @@
         display: flex;
       }
 
-      .filter-radios {
-        flex-direction: column;
-        gap: 10px;
-        margin-bottom: 12px;
-      }
-
-      .filter-search {
-        width: 100%;
-        margin-bottom: 12px;
-      }
-
-      .filter-button {
-        width: 100%;
-        padding: 10px 0;
-      }
-
       .hamburger {
         display: flex;
+        flex-direction: column;
+        gap: 4px;
+        cursor: pointer;
+      }
+
+      .hamburger div {
+        background: white;
+        height: 3px;
       }
 
       .search-icon {
         display: block;
+        font-size: 1.5rem;
+        margin-left: 10px;
+        color: white;
+        background: none;
+        border: none;
+        cursor: pointer;
       }
     }
 
@@ -240,7 +152,6 @@
       font-weight: 700;
     }
 
-    /* Disclaimer */
     .disclaimer {
       width: 90%;
       margin: 10px auto 25px;
@@ -250,16 +161,6 @@
       color: #333;
       font-size: 1rem;
       border-radius: 6px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    }
-
-    .disclaimer ol {
-      margin: 10px 0 0 20px;
-      padding: 0;
-    }
-
-    .disclaimer strong {
-      color: #d17b00;
     }
 
     table {
@@ -277,13 +178,11 @@
       border: 1px solid #ddd;
       padding: 12px;
       text-align: center;
-      font-size: 1em;
     }
 
     th {
       background-color: #e6f0ff;
       color: #004080;
-      font-weight: 700;
     }
 
     tbody tr:nth-child(even) {
@@ -293,6 +192,41 @@
     .highlight {
       background-color: #fff3b0 !important;
       font-weight: 700;
+    }
+
+    /* Pagination Styles */
+    .pagination {
+      width: 90%;
+      margin: 20px auto 15px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: nowrap;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 4px 0;
+    }
+
+    .page-link {
+      padding: 8px 14px;
+      border: 1px solid #004080;
+      color: #004080;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: background 0.3s;
+      user-select: none;
+    }
+
+    .page-link:hover {
+      background-color: #004080;
+      color: white;
+    }
+
+    .page-link.current {
+      background-color: #004080;
+      color: white;
+      pointer-events: none;
     }
   </style>
 </head>
@@ -306,33 +240,26 @@
       <form method="get" id="filterForm"
         style="display: flex; flex-wrap: wrap; gap: 15px; align-items: center; width: 100%;">
         <div class="filter-radios">
-          <label><input type="radio" name="group" value="all" {% if selected_group=='all' %}checked{% endif %}>
-            All</label>
-          <label><input type="radio" name="group" value="Science" {% if selected_group=='Science' %}checked{% endif %}>
-            Science</label>
-          <label><input type="radio" name="group" value="Business Studies" {% if selected_group=='Business Studies'
-              %}checked{% endif %}> Commerce</label>
-          <label><input type="radio" name="group" value="Humanities" {% if selected_group=='Humanities' %}checked{%
-              endif %}> Humanities</label>
+          <label><input type="radio" name="group" value="all" {% if selected_group=='all' %}checked{% endif %}> All</label>
+          <label><input type="radio" name="group" value="Science" {% if selected_group=='Science' %}checked{% endif %}> Science</label>
+          <label><input type="radio" name="group" value="Business Studies" {% if selected_group=='Business Studies' %}checked{% endif %}> Commerce</label>
+          <label><input type="radio" name="group" value="Humanities" {% if selected_group=='Humanities' %}checked{% endif %}> Humanities</label>
         </div>
 
         <input type="text" name="roll" placeholder="Enter Roll" value="{{ search_roll }}" class="filter-search" />
-
         <button type="submit" class="filter-button">Filter/Search</button>
       </form>
     </div>
 
-    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle filter menu" title="Filter options">
+    <button class="hamburger" id="hamburgerBtn">
       <div></div>
       <div></div>
       <div></div>
     </button>
 
-    <button class="search-icon" id="searchIconBtn" aria-label="Toggle search" title="Search">
-      🔍
-    </button>
+    <button class="search-icon" id="searchIconBtn">🔍</button>
 
-    <a href="/about" class="about-link" title="About this app">About</a>
+    <a href="/about" class="about-link">About</a>
   </nav>
 
   <h2>Total Marks by Student</h2>
@@ -345,13 +272,68 @@
     </ol>
   </div>
 
+  <!-- Pagination BEFORE table -->
+  <div class="pagination">
+    {% if page > 1 %}
+    <a class="page-link" href="?group={{ selected_group }}&page={{ page - 1 }}&roll={{ search_roll }}">« Prev</a>
+    {% endif %}
+
+    {% set max_links = 10 %}
+    {% set half = max_links // 2 %}
+    {% set start_page = page - half %}
+    {% set end_page = page + half %}
+
+    {# Adjust if start_page < 1 #}
+    {% if start_page < 1 %}
+      {% set end_page = end_page + (1 - start_page) %}
+      {% set start_page = 1 %}
+    {% endif %}
+
+    {# Adjust if end_page > total_pages #}
+    {% if end_page > total_pages %}
+      {% set start_page = start_page - (end_page - total_pages) %}
+      {% if start_page < 1 %}
+        {% set start_page = 1 %}
+      {% endif %}
+      {% set end_page = total_pages %}
+    {% endif %}
+
+    {# Show first page and dots if needed #}
+    {% if start_page > 1 %}
+      <a class="page-link" href="?group={{ selected_group }}&page=1&roll={{ search_roll }}">1</a>
+      {% if start_page > 2 %}
+        <span class="page-link">...</span>
+      {% endif %}
+    {% endif %}
+
+    {# Show page links from start_page to end_page #}
+    {% for p in range(start_page, end_page + 1) %}
+      {% if p == page %}
+        <span class="page-link current">{{ p }}</span>
+      {% else %}
+        <a class="page-link" href="?group={{ selected_group }}&page={{ p }}&roll={{ search_roll }}">{{ p }}</a>
+      {% endif %}
+    {% endfor %}
+
+    {# Show dots and last page if needed #}
+    {% if end_page < total_pages %}
+      {% if end_page < total_pages - 1 %}
+        <span class="page-link">...</span>
+      {% endif %}
+      <a class="page-link" href="?group={{ selected_group }}&page={{ total_pages }}&roll={{ search_roll }}">{{ total_pages }}</a>
+    {% endif %}
+
+    {% if page < total_pages %}
+    <a class="page-link" href="?group={{ selected_group }}&page={{ page + 1 }}&roll={{ search_roll }}">Next »</a>
+    {% endif %}
+  </div>
+
   <table>
     <thead>
       <tr>
         <th>Rank</th>
         <th>Roll</th>
         <th>Group</th>
-        <!-- <th>School</th> -->
         <th>GPA</th>
         <th>Total Marks</th>
       </tr>
@@ -362,17 +344,68 @@
         <td>{{ student.rank }}</td>
         <td>{{ student.roll }}</td>
         <td>{{ student.group }}</td>
-        <!-- <td>{{ student.school_name }}</td> -->
         <td>{{ student.gpa }}</td>
         <td>{{ student.total_marks }}</td>
-      </tr>
-      {% else %}
-      <tr>
-        <td colspan="6">No students found.</td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
+
+  <!-- Pagination AFTER table (optional, duplicate of above) -->
+  <div class="pagination">
+    {% if page > 1 %}
+    <a class="page-link" href="?group={{ selected_group }}&page={{ page - 1 }}&roll={{ search_roll }}">« Prev</a>
+    {% endif %}
+
+    {% set max_links = 10 %}
+    {% set half = max_links // 2 %}
+    {% set start_page = page - half %}
+    {% set end_page = page + half %}
+
+    {# Adjust if start_page < 1 #}
+    {% if start_page < 1 %}
+      {% set end_page = end_page + (1 - start_page) %}
+      {% set start_page = 1 %}
+    {% endif %}
+
+    {# Adjust if end_page > total_pages #}
+    {% if end_page > total_pages %}
+      {% set start_page = start_page - (end_page - total_pages) %}
+      {% if start_page < 1 %}
+        {% set start_page = 1 %}
+      {% endif %}
+      {% set end_page = total_pages %}
+    {% endif %}
+
+    {# Show first page and dots if needed #}
+    {% if start_page > 1 %}
+      <a class="page-link" href="?group={{ selected_group }}&page=1&roll={{ search_roll }}">1</a>
+      {% if start_page > 2 %}
+        <span class="page-link">...</span>
+      {% endif %}
+    {% endif %}
+
+    {# Show page links from start_page to end_page #}
+    {% for p in range(start_page, end_page + 1) %}
+      {% if p == page %}
+        <span class="page-link current">{{ p }}</span>
+      {% else %}
+        <a class="page-link" href="?group={{ selected_group }}&page={{ p }}&roll={{ search_roll }}">{{ p }}</a>
+      {% endif %}
+    {% endfor %}
+
+    {# Show dots and last page if needed #}
+    {% if end_page < total_pages %}
+      {% if end_page < total_pages - 1 %}
+        <span class="page-link">...</span>
+      {% endif %}
+      <a class="page-link" href="?group={{ selected_group }}&page={{ total_pages }}&roll={{ search_roll }}">{{ total_pages }}</a>
+    {% endif %}
+
+    {% if page < total_pages %}
+    <a class="page-link" href="?group={{ selected_group }}&page={{ page + 1 }}&roll={{ search_roll }}">Next »</a>
+    {% endif %}
+  </div>
 
   <script>
     const hamburgerBtn = document.getElementById('hamburgerBtn');
@@ -385,14 +418,6 @@
 
     searchIconBtn.addEventListener('click', () => {
       filterContainer.classList.toggle('active');
-    });
-
-    document.addEventListener('click', (e) => {
-      if (!filterContainer.contains(e.target) &&
-        !hamburgerBtn.contains(e.target) &&
-        !searchIconBtn.contains(e.target)) {
-        filterContainer.classList.remove('active');
-      }
     });
   </script>
 
