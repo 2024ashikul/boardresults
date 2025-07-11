@@ -6,7 +6,6 @@ from pdfminer.high_level import extract_text
 PDF_FOLDER = 'pdfs'
 DB_FILE = 'results.db'
 
-# Detect group from a roll number block
 def detect_group(line):
     if "SCIENCE" in line:
         return "Science"
@@ -16,36 +15,63 @@ def detect_group(line):
         return "Humanities"
     return None
 
-# Parse students and metadata from text
 def parse_student_data(text):
     students = []
     current_group = None
 
     lines = text.splitlines()
-    school_name = None
-    board = None
+    non_blank_lines = [line.strip() for line in lines if line.strip()]
 
+    school_name = ""
+    board = ""
+
+    # ✅ Improved school name extraction - handles multiple formats
+    school_line = None
+    for line in non_blank_lines:
+        if "INSTITUTE NAME" in line.upper():
+            school_line = line
+            break
+    
+    if school_line:
+        # Pattern 1: With school code in parentheses
+        match = re.search(r'INSTITUTE NAME\s*:\s*(.+?)\s*\(\d+\)', school_line, re.IGNORECASE)
+        if match:
+            school_name = match.group(1).strip()
+        else:
+            # Pattern 2: Without school code
+            match = re.search(r'INSTITUTE NAME\s*:\s*(.+)', school_line, re.IGNORECASE)
+            if match:
+                school_name = match.group(1).strip()
+            else:
+                # Fallback: Take everything after colon
+                if ':' in school_line:
+                    school_name = school_line.split(':', 1)[1].strip()
+        
+        # Clean up any trailing numbers or special characters
+        school_name = re.sub(r'[\d\(\)]+$', '', school_name).strip()
+        print(f"✅ School name detected: {school_name}")
+    else:
+        print("❌ Could not find 'INSTITUTE NAME' in document")
+
+    # ✅ Extract board name from first few non-blank lines
+    for line in non_blank_lines[:10]:
+        if "BOARD OF" in line.upper():
+            board = line.strip()
+            break
+
+    # Process student results
     for line in lines:
         line = line.strip()
-
-        # Detect board
-        if not board and "BOARD OF INTERMEDIATE" in line.upper():
-            board = line.strip()
-
-        # Detect school name
-        if not school_name and "INSTITUTE NAME" in line.upper():
-            match = re.search(r'INSTITUTE NAME\s*:\s*(.+)', line, re.IGNORECASE)
-            if match:
-                school_name = match.group(1).split('(')[0].strip()
-                print(f"✅ School name detected: {school_name}")
-
-        # Detect group
+        
+        # Skip lines that are clearly not student data
+        if not line or "PERCENT" in line or "PASS" in line or "GPA5" in line:
+            continue
+            
         detected = detect_group(line.upper())
         if detected:
             current_group = detected
             continue
 
-        # Detect student data
         match = re.match(r"(\d{6})\[(\d\.\d{2})]:([^\n]+)", line)
         if match:
             roll, gpa, subjects_raw = match.groups()
@@ -62,11 +88,12 @@ def parse_student_data(text):
                 'gpa': float(gpa),
                 'group': current_group,
                 'subjects': subject_data,
-                'school_name': school_name if school_name else '',
-                'board': board if board else ''
+                'school_name': school_name,
+                'board': board
             })
 
     return students
+
 
 def ensure_table_and_columns(conn, subject_codes):
     cursor = conn.cursor()
