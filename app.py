@@ -148,6 +148,9 @@ def student_result(roll):
 
     return render_template('student_result.html', student=student)
 
+@app.route('./about')
+def about():
+    render_template('about.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
