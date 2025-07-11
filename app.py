@@ -5,8 +5,6 @@ import os
 
 app = Flask(__name__)
 
-port = int(os.environ.get("PORT", 10000))
-app.run(host='0.0.0.0', port=port)
 
 subject_id_name_map = {
     '101': 'Bangla',
@@ -155,5 +153,7 @@ def student_result(roll):
 def about():
     render_template('about.html')
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    import os
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
