@@ -12,52 +12,52 @@ def show_student_totals():
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
 
-    # Get subject columns (excluding non-marks fields)
+    # Get all subject columns except metadata columns
     cursor.execute("PRAGMA table_info(students);")
-    columns = [col[1] for col in cursor.fetchall() if col[1] not in (
-        'roll', 'gpa', 'group_name', 'school_name', 'board', 'zilla', 'thana')]
+    all_cols = [col[1] for col in cursor.fetchall()]
+    marks_cols = [c for c in all_cols if c not in ('roll', 'gpa', 'group_name', 'school_name', 'board', 'zilla', 'thana')]
 
-    # Step 1: Fetch all GPA 5 students
+    # Fetch all GPA=5 students
     cursor.execute("SELECT * FROM students WHERE gpa = 5.0")
-    all_rows = cursor.fetchall()
+    rows = cursor.fetchall()
 
-    all_students = []
-    for row in all_rows:
-        total = sum(float(row[col] or 0) for col in columns)
-        all_students.append({
+    # Build all students with total marks and group info
+    students = []
+    for row in rows:
+        total = sum(float(row[col] or 0) for col in marks_cols)
+        students.append({
             'roll': row['roll'],
             'gpa': row['gpa'],
             'group': row['group_name'],
             'school_name': row['school_name'],
-            'total_marks': round(total, 2) + 150  # Apply +150
+            'total_marks': round(total + 150, 2)  # +150 boost
         })
 
-    # Step 2: Rank all students globally
-    all_students.sort(key=lambda x: x['total_marks'], reverse=True)
-    roll_to_rank = {}
-    for idx, student in enumerate(all_students, start=1):
-        student['rank'] = idx
-        roll_to_rank[student['roll']] = student
+    # Filter students by selected group (if not 'all')
+    if selected_group.lower() != 'all':
+        filtered_students = [s for s in students if s['group'].lower() == selected_group.lower()]
+    else:
+        filtered_students = students
 
-    # Step 3: Apply filters for final display
-    filtered_students = []
-    for student in all_students:
-        if selected_group.lower() != 'all' and student['group'] != selected_group:
-            continue
-        if search_roll and str(student['roll']) != search_roll:
-            continue
-        filtered_students.append(student)
+    # Sort filtered students by total marks descending
+    filtered_students.sort(key=lambda x: x['total_marks'], reverse=True)
+
+    # Assign rank within filtered list
+    for idx, s in enumerate(filtered_students, start=1):
+        s['rank'] = idx
+
+    # If searching by roll, show only that student from filtered list (with their rank)
+    if search_roll:
+        filtered_students = [s for s in filtered_students if str(s['roll']) == search_roll]
+
+    conn.close()
 
     return render_template(
-        "students.html",
+        'students.html',
         students=filtered_students,
         search_roll=search_roll,
         selected_group=selected_group
     )
-
-@app.route('/about')
-def about():
-    return render_template('about.htm')
 
 if __name__ == '__main__':
     app.run(debug=True)
