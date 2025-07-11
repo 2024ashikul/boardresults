@@ -13,10 +13,9 @@ subject_id_name_map = {
     '126' : 'Higer Mathematics',
     '152': 'Finance and Banking',
     '143': 'Business Entrepreneurship',
-    '146': 'Accounting',
     '147': 'Physical Education, Health, and Sports',
     '153': 'History of Bangladesh and World Civilization',
-    '134': 'Agriculture Studies (Old)',
+    '134': 'Agriculture Studies ',
     '111': 'Islam and Moral Education',
     '112': 'Hindu and Moral Education',
     '127': 'Science',
@@ -26,7 +25,12 @@ subject_id_name_map = {
     '109': 'Mathematics',
     '136' : 'Physics',
     '138' : 'Biology',
-    '137' : 'Chemistry'
+    '137' : 'Chemistry',
+    '146' : 'Accounting',
+    '151' :'Home Science',
+    '153' :'HISTORY OF BANGLADESH AND WORLD CIVILIZATION',
+    '140' : 'CIVICS AND CITIZENSHIP',
+    '110' :'GEOGRAPHY AND ENVIRONMENT'
 }
 
 
