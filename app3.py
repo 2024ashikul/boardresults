@@ -12,9 +12,11 @@ def show_student_totals():
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
 
+    # Get subject columns only (exclude metadata)
     cursor.execute("PRAGMA table_info(students);")
-    columns = [col[1] for col in cursor.fetchall() if col[1] not in ('roll', 'gpa', 'group_name')]
+    columns = [col[1] for col in cursor.fetchall() if col[1] not in ('roll', 'gpa', 'group_name', 'school_name', 'board', 'zilla', 'thana')]
 
+    # Get all student rows
     cursor.execute("SELECT * FROM students;")
     rows = cursor.fetchall()
     conn.close()
@@ -32,18 +34,17 @@ def show_student_totals():
             'roll': row['roll'],
             'gpa': row['gpa'],
             'group': row['group_name'],
-            'total_marks': round(total, 2) + 150
+            'school_name': row['school_name'],
+            'total_marks': round(total, 2) + 150  # extra fixed marks
         })
 
-    # Filter by group if selected and not 'all'
+    # Apply filters
     if selected_group.lower() != 'all':
         students = [s for s in students if s['group'] == selected_group]
-
-    # If searching by roll, filter first (so search works even with group filter)
     if search_roll:
         students = [s for s in students if s['roll'] == search_roll]
 
-    # Sort and re-rank students after filtering
+    # Sort and rank
     students.sort(key=lambda x: x['total_marks'], reverse=True)
     for idx, student in enumerate(students, start=1):
         student['rank'] = idx
@@ -57,8 +58,7 @@ def show_student_totals():
 
 @app.route('/about')
 def about():
-    return "<h1>About This App</h1><p>This app displays student marks by group and roll number.</p>"
-
+    return render_template('about.htm')
 
 if __name__ == '__main__':
     app.run(debug=True)

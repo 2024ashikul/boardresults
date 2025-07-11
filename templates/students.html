@@ -226,13 +226,13 @@
 </nav>
 
 <h2>Total Marks by Student</h2>
-
 <table>
   <thead>
     <tr>
       <th>Rank</th>
       <th>Roll</th>
       <th>Group</th>
+      <th>School</th>
       <th>GPA</th>
       <th>Total Marks</th>
     </tr>
@@ -243,11 +243,12 @@
       <td>{{ student.rank }}</td>
       <td>{{ student.roll }}</td>
       <td>{{ student.group }}</td>
+      <td>{{ student.school_name }}</td>
       <td>{{ student.gpa }}</td>
       <td>{{ student.total_marks }}</td>
     </tr>
     {% else %}
-    <tr><td colspan="5">No students found.</td></tr>
+    <tr><td colspan="6">No students found.</td></tr>
     {% endfor %}
   </tbody>
 </table>
