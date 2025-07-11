@@ -1,316 +1,391 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Student Total Marks</title>
-<style>
-  /* Reset & basics */
-  * {
-    box-sizing: border-box;
-  }
-  body {
-    margin: 0; 
-    font-family: Arial, sans-serif;
-    background: #f9f9f9;
-    color: #004080;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <title>Chattogram Board HSC Result 2025 - Student Rank, GPA & Marks</title>
+  <meta name="description" content="Check Chattogram Board HSC Result 2025 with GPA, total marks, and student ranks. Search by roll or filter by group (Science, Humanities, Commerce).">
+  <meta name="keywords" content="Chattogram Board Result 2025, HSC Rank List, GPA 2025, HSC Total Marks, Roll Number Result, Board Result Chattogram">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Board Result Chattogram">
+  
+  <!-- Open Graph for social sharing -->
+  <meta property="og:title" content="Chattogram Board HSC Result 2025">
+  <meta property="og:description" content="Find HSC student ranks, GPA, and total marks for Chattogram Board 2025.">
+  <meta property="og:image" content="https://yourdomain.com/static/og-image.jpg">
+  <meta property="og:url" content="https://yourdomain.com/results">
+  <meta property="og:type" content="website">
 
-  /* Navbar */
-  nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #004080;
-    padding: 12px 24px;
-    color: white;
-    position: relative;
-  }
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Chattogram Board HSC Result 2025">
+  <meta name="twitter:description" content="Explore student GPA, marks and ranks for HSC 2025 Chattogram Board.">
+  <meta name="twitter:image" content="https://yourdomain.com/static/og-image.jpg">
 
-  .brand {
-    font-weight: 700;
-    font-size: 1.4rem;
-    user-select: none;
-    white-space: nowrap;
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    "name": "Chattogram Board HSC Results 2025",
+    "description": "Student results dataset showing roll numbers, group, GPA, and total marks for HSC 2025 in Chattogram District.",
+    "url": "https://yourdomain.com/results",
+    "creator": {
+      "@type": "Organization",
+      "name": "Board Result Chattogram"
+    },
+    "keywords": [
+      "Chattogram HSC Result",
+      "Board Rank 2025",
+      "Total Marks HSC",
+      "HSC GPA List 2025"
+    ],
+    "distribution": {
+      "@type": "DataDownload",
+      "encodingFormat": "CSV",
+      "contentUrl": "https://yourdomain.com/data/results.csv"
+    }
   }
+  </script>
 
-  .filter-container {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-  }
+  <title>Student Total Marks</title>
+  <style>
+    /* Reset & basics */
+    * {
+      box-sizing: border-box;
+    }
 
-  .filter-radios {
-    display: flex;
-    gap: 12px;
-    white-space: nowrap;
-  }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      color: #004080;
+    }
 
-  .filter-radios label {
-    cursor: pointer;
-    font-weight: 600;
-    user-select: none;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
+    /* Navbar */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #004080;
+      padding: 12px 24px;
+      color: white;
+      position: relative;
+    }
 
-  .filter-radios input[type="radio"] {
-    cursor: pointer;
-  }
+    .brand {
+      font-weight: 700;
+      font-size: 1.4rem;
+      user-select: none;
+      white-space: nowrap;
+    }
 
-  .filter-search {
-    padding: 6px 10px;
-    border-radius: 4px;
-    border: none;
-    font-size: 1rem;
-    width: 140px;
-  }
-
-  .filter-button {
-    background-color: #0066cc;
-    border: none;
-    border-radius: 4px;
-    padding: 8px 16px;
-    color: white;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    white-space: nowrap;
-  }
-  .filter-button:hover {
-    background-color: #004d99;
-  }
-
-  .about-link {
-    color: white;
-    font-weight: 700;
-    text-decoration: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    border: 2px solid transparent;
-    transition: border-color 0.3s ease;
-    user-select: none;
-    white-space: nowrap;
-  }
-  .about-link:hover {
-    border-color: white;
-  }
-
-  .hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 4px;
-    cursor: pointer;
-    user-select: none;
-    width: 25px;
-    height: 20px;
-  }
-  .hamburger div {
-    background: white;
-    height: 3px;
-    border-radius: 2px;
-  }
-
-  .search-icon {
-    display: none;
-    background: transparent;
-    border: none;
-    color: white;
-    font-size: 1.5rem;
-    cursor: pointer;
-    margin-left: 10px;
-    user-select: none;
-    padding: 0;
-    line-height: 1;
-  }
-
-  @media (max-width: 700px) {
     .filter-container {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .filter-radios {
+      display: flex;
+      gap: 12px;
+      white-space: nowrap;
+    }
+
+    .filter-radios label {
+      cursor: pointer;
+      font-weight: 600;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .filter-radios input[type="radio"] {
+      cursor: pointer;
+    }
+
+    .filter-search {
+      padding: 6px 10px;
+      border-radius: 4px;
+      border: none;
+      font-size: 1rem;
+      width: 140px;
+    }
+
+    .filter-button {
+      background-color: #0066cc;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 16px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .filter-button:hover {
+      background-color: #004d99;
+    }
+
+    .about-link {
+      color: white;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      border: 2px solid transparent;
+      transition: border-color 0.3s ease;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .about-link:hover {
+      border-color: white;
+    }
+
+    .hamburger {
       display: none;
       flex-direction: column;
-      background: #004080;
-      position: absolute;
-      top: 56px;
-      right: 0;
-      width: 100%;
-      max-width: 320px;
-      padding: 16px 20px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      border-radius: 0 0 8px 8px;
-      z-index: 20;
+      gap: 4px;
+      cursor: pointer;
+      user-select: none;
+      width: 25px;
+      height: 20px;
     }
-    .filter-container.active {
-      display: flex;
+
+    .hamburger div {
+      background: white;
+      height: 3px;
+      border-radius: 2px;
     }
-    .filter-radios {
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-    .filter-search {
-      width: 100%;
-      margin-bottom: 12px;
-    }
-    .filter-button {
-      width: 100%;
-      padding: 10px 0;
-    }
-    .hamburger {
-      display: flex;
-    }
+
     .search-icon {
-      display: block;
+      display: none;
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      margin-left: 10px;
+      user-select: none;
+      padding: 0;
+      line-height: 1;
     }
-  }
 
-  h2 {
-    text-align: center;
-    margin: 25px 0 15px;
-    color: #004080;
-    font-weight: 700;
-  }
+    @media (max-width: 700px) {
+      .filter-container {
+        display: none;
+        flex-direction: column;
+        background: #004080;
+        position: absolute;
+        top: 56px;
+        right: 0;
+        width: 100%;
+        max-width: 320px;
+        padding: 16px 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 0 0 8px 8px;
+        z-index: 20;
+      }
 
-  /* Disclaimer */
-  .disclaimer {
-    width: 90%;
-    margin: 10px auto 25px;
-    padding: 15px 20px;
-    background-color: #fff8e1;
-    border-left: 6px solid #ffa000;
-    color: #333;
-    font-size: 1rem;
-    border-radius: 6px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-  }
+      .filter-container.active {
+        display: flex;
+      }
 
-  .disclaimer ol {
-    margin: 10px 0 0 20px;
-    padding: 0;
-  }
+      .filter-radios {
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 12px;
+      }
 
-  .disclaimer strong {
-    color: #d17b00;
-  }
+      .filter-search {
+        width: 100%;
+        margin-bottom: 12px;
+      }
 
-  table {
-    border-collapse: collapse; 
-    width: 90%; 
-    margin: 0 auto 40px;
-    background: #fff;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  th, td { 
-    border: 1px solid #ddd; 
-    padding: 12px; 
-    text-align: center;
-    font-size: 1em;
-  }
-  th { 
-    background-color: #e6f0ff; 
-    color: #004080;
-    font-weight: 700;
-  }
-  tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  .highlight {
-    background-color: #fff3b0 !important;
-    font-weight: 700;
-  }
-</style>
+      .filter-button {
+        width: 100%;
+        padding: 10px 0;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .search-icon {
+        display: block;
+      }
+    }
+
+    h2 {
+      text-align: center;
+      margin: 25px 0 15px;
+      color: #004080;
+      font-weight: 700;
+    }
+
+    /* Disclaimer */
+    .disclaimer {
+      width: 90%;
+      margin: 10px auto 25px;
+      padding: 15px 20px;
+      background-color: #fff8e1;
+      border-left: 6px solid #ffa000;
+      color: #333;
+      font-size: 1rem;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .disclaimer ol {
+      margin: 10px 0 0 20px;
+      padding: 0;
+    }
+
+    .disclaimer strong {
+      color: #d17b00;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 90%;
+      margin: 0 auto 40px;
+      background: #fff;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: center;
+      font-size: 1em;
+    }
+
+    th {
+      background-color: #e6f0ff;
+      color: #004080;
+      font-weight: 700;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .highlight {
+      background-color: #fff3b0 !important;
+      font-weight: 700;
+    }
+  </style>
 </head>
+
 <body>
 
-<nav>
-  <div class="brand">Board Result Chattogram</div>
+  <nav>
+    <div class="brand">Board Result Chattogram</div>
 
-  <div class="filter-container" id="filterContainer">
-    <form method="get" id="filterForm" style="display: flex; flex-wrap: wrap; gap: 15px; align-items: center; width: 100%;">
-      <div class="filter-radios">
-        <label><input type="radio" name="group" value="all" {% if selected_group == 'all' %}checked{% endif %}> All</label>
-        <label><input type="radio" name="group" value="Science" {% if selected_group == 'Science' %}checked{% endif %}> Science</label>
-        <label><input type="radio" name="group" value="Business Studies" {% if selected_group == 'Business Studies' %}checked{% endif %}> Commerce</label>
-        <label><input type="radio" name="group" value="Humanities" {% if selected_group == 'Humanities' %}checked{% endif %}> Humanities</label>
-      </div>
+    <div class="filter-container" id="filterContainer">
+      <form method="get" id="filterForm"
+        style="display: flex; flex-wrap: wrap; gap: 15px; align-items: center; width: 100%;">
+        <div class="filter-radios">
+          <label><input type="radio" name="group" value="all" {% if selected_group=='all' %}checked{% endif %}>
+            All</label>
+          <label><input type="radio" name="group" value="Science" {% if selected_group=='Science' %}checked{% endif %}>
+            Science</label>
+          <label><input type="radio" name="group" value="Business Studies" {% if selected_group=='Business Studies'
+              %}checked{% endif %}> Commerce</label>
+          <label><input type="radio" name="group" value="Humanities" {% if selected_group=='Humanities' %}checked{%
+              endif %}> Humanities</label>
+        </div>
 
-      <input type="text" name="roll" placeholder="Enter Roll" value="{{ search_roll }}" class="filter-search" />
+        <input type="text" name="roll" placeholder="Enter Roll" value="{{ search_roll }}" class="filter-search" />
 
-      <button type="submit" class="filter-button">Filter/Search</button>
-    </form>
+        <button type="submit" class="filter-button">Filter/Search</button>
+      </form>
+    </div>
+
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle filter menu" title="Filter options">
+      <div></div>
+      <div></div>
+      <div></div>
+    </button>
+
+    <button class="search-icon" id="searchIconBtn" aria-label="Toggle search" title="Search">
+      🔍
+    </button>
+
+    <a href="/about" class="about-link" title="About this app">About</a>
+  </nav>
+
+  <h2>Total Marks by Student</h2>
+
+  <div class="disclaimer">
+    <strong>Please note:</strong>
+    <ol>
+      <li>Everyone's marks are increased by <strong>150</strong> from the original marks.</li>
+      <li>Only <strong>Chattogram District</strong> results are shown. Other 4 districts will be added soon.</li>
+    </ol>
   </div>
 
-  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle filter menu" title="Filter options">
-    <div></div><div></div><div></div>
-  </button>
+  <table>
+    <thead>
+      <tr>
+        <th>Rank</th>
+        <th>Roll</th>
+        <th>Group</th>
+        <!-- <th>School</th> -->
+        <th>GPA</th>
+        <th>Total Marks</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for student in students %}
+      <tr {% if student.roll==search_roll %} class="highlight" {% endif %}>
+        <td>{{ student.rank }}</td>
+        <td>{{ student.roll }}</td>
+        <td>{{ student.group }}</td>
+        <!-- <td>{{ student.school_name }}</td> -->
+        <td>{{ student.gpa }}</td>
+        <td>{{ student.total_marks }}</td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="6">No students found.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 
-  <button class="search-icon" id="searchIconBtn" aria-label="Toggle search" title="Search">
-    🔍
-  </button>
+  <script>
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const filterContainer = document.getElementById('filterContainer');
+    const searchIconBtn = document.getElementById('searchIconBtn');
 
-  <a href="/about" class="about-link" title="About this app">About</a>
-</nav>
+    hamburgerBtn.addEventListener('click', () => {
+      filterContainer.classList.toggle('active');
+    });
 
-<h2>Total Marks by Student</h2>
+    searchIconBtn.addEventListener('click', () => {
+      filterContainer.classList.toggle('active');
+    });
 
-<div class="disclaimer">
-  <strong>Please note:</strong>
-  <ol>
-    <li>Everyone's marks are increased by <strong>150</strong> from the original marks.</li>
-    <li>Only <strong>Chattogram District</strong> results are shown. Other 4 districts will be added soon.</li>
-  </ol>
-</div>
-
-<table>
-  <thead>
-    <tr>
-      <th>Rank</th>
-      <th>Roll</th>
-      <th>Group</th>
-      <!-- <th>School</th> -->
-      <th>GPA</th>
-      <th>Total Marks</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for student in students %}
-    <tr {% if student.roll == search_roll %} class="highlight" {% endif %}>
-      <td>{{ student.rank }}</td>
-      <td>{{ student.roll }}</td>
-      <td>{{ student.group }}</td>
-      <!-- <td>{{ student.school_name }}</td> -->
-      <td>{{ student.gpa }}</td>
-      <td>{{ student.total_marks }}</td>
-    </tr>
-    {% else %}
-    <tr><td colspan="6">No students found.</td></tr>
-    {% endfor %}
-  </tbody>
-</table>
-
-<script>
-  const hamburgerBtn = document.getElementById('hamburgerBtn');
-  const filterContainer = document.getElementById('filterContainer');
-  const searchIconBtn = document.getElementById('searchIconBtn');
-
-  hamburgerBtn.addEventListener('click', () => {
-    filterContainer.classList.toggle('active');
-  });
-
-  searchIconBtn.addEventListener('click', () => {
-    filterContainer.classList.toggle('active');
-  });
-
-  document.addEventListener('click', (e) => {
-    if (!filterContainer.contains(e.target) && 
-        !hamburgerBtn.contains(e.target) && 
+    document.addEventListener('click', (e) => {
+      if (!filterContainer.contains(e.target) &&
+        !hamburgerBtn.contains(e.target) &&
         !searchIconBtn.contains(e.target)) {
-      filterContainer.classList.remove('active');
-    }
-  });
-</script>
+        filterContainer.classList.remove('active');
+      }
+    });
+  </script>
 
 </body>
+
 </html>
