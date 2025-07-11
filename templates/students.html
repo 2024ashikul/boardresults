@@ -337,17 +337,23 @@
         <th>Total Marks</th>
       </tr>
     </thead>
-    <tbody>
-      {% for student in students %}
-      <tr {% if student.roll==search_roll %} class="highlight" {% endif %}>
-        <td>{{ student.rank }}</td>
-        <td>{{ student.roll }}</td>
-        <td>{{ student.group }}</td>
-        <td>{{ student.gpa }}</td>
-        <td>{{ student.total_marks }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
+<tbody>
+  {% for student in students %}
+  <tr 
+  class="{% if student.roll == search_roll %}highlight{% endif %}" 
+  style="cursor: pointer;"
+  onclick="window.location.href='/result/{{ student.roll }}';"
+>
+  <td>{{ student.rank }}</td>
+  <td>{{ student.roll }}</td>
+  <td>{{ student.group }}</td>
+  <td>{{ student.gpa }}</td>
+  <td>{{ student.total_marks }}</td>
+</tr>
+
+  {% endfor %}
+</tbody>
+
   </table>
 
   <!-- Pagination AFTER table (optional, duplicate of above) -->

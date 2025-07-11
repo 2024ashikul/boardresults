@@ -4,6 +4,32 @@ import math
 
 app = Flask(__name__)
 
+
+subject_id_name_map = {
+    '101': 'Bangla',
+    '107': 'English',
+    '108': 'English 2nd Paper',
+    '154': 'Information & Communication Technology',
+    '126' : 'Higer Mathematics',
+    '152': 'Finance and Banking',
+    '143': 'Business Entrepreneurship',
+    '146': 'Accounting',
+    '147': 'Physical Education, Health, and Sports',
+    '153': 'History of Bangladesh and World Civilization',
+    '134': 'Agriculture Studies (Old)',
+    '111': 'Islam and Moral Education',
+    '112': 'Hindu and Moral Education',
+    '127': 'Science',
+    '150': 'Bangladesh and Global Studies',
+    '156': 'Career Education',
+    '110': 'Geography and Environment (Old)',
+    '109': 'Mathematics',
+    '136' : 'Physics',
+    '138' : 'Biology',
+    '137' : 'Chemistry'
+}
+
+
 @app.route('/')
 def show_student_totals():
     search_roll = request.args.get('roll', '').strip()
@@ -77,6 +103,46 @@ def show_student_totals():
         total_pages=total_pages
     )
 
+@app.route('/result/<int:roll>')
+def student_result(roll):
+    conn = sqlite3.connect('results.db')
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+
+    # Get column names
+    cursor.execute("PRAGMA table_info(students);")
+    all_cols = [col[1] for col in cursor.fetchall()]
+    exclude_cols = ('roll', 'gpa', 'group_name', 'school_name', 'board', 'zilla', 'thana')
+    marks_cols = [c for c in all_cols if c not in exclude_cols]
+
+    # Fetch student row
+    cursor.execute("SELECT * FROM students WHERE roll = ?", (roll,))
+    row = cursor.fetchone()
+
+    if row is None:
+        return f"No student found with roll {roll}", 404
+
+    subject_marks = {}
+    for col in marks_cols:
+        if row[col] is not None:
+            subject_id = col.replace('_marks', '')
+            subject_name = subject_id_name_map.get(subject_id, f"Unknown Subject ({subject_id})")
+            subject_marks[subject_name] = row[col]
+
+    total = sum(float(row[col] or 0) for col in marks_cols)
+
+    student = {
+        'roll': row['roll'],
+        'gpa': row['gpa'],
+        'group': row['group_name'],
+        'school_name': row['school_name'],
+        'total_marks': round(total + 150, 2),
+        'subject_marks': subject_marks
+    }
+
+    conn.close()
+
+    return render_template('student_result.html', student=student)
 
 
 if __name__ == '__main__':

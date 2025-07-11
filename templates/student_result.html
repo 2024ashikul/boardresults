@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Result for Roll {{ student.roll }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            color: #333;
+            margin: 40px;
+        }
+
+        h1, h2 {
+            color: #2c3e50;
+        }
+
+        .student-info {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+
+        .student-info p {
+            margin: 8px 0;
+            font-size: 16px;
+        }
+
+        table {
+            width: 100%;
+            max-width: 600px;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #2980b9;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #2980b9;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="student-info">
+        <h1>Result for Roll: {{ student.roll }}</h1>
+        <p><strong>GPA:</strong> {{ student.gpa }}</p>
+        <p><strong>Group:</strong> {{ student.group }}</p>
+        <p><strong>School:</strong> {{ student.school_name }}</p>
+        <p><strong>Total Marks:</strong> {{ student.total_marks }}</p>
+    </div>
+
+    <h2>Subject-wise Marks</h2>
+    <table>
+        <tr>
+            <th>Subject</th>
+            <th>Marks</th>
+        </tr>
+        {% for subject, marks in student.subject_marks.items() %}
+        <tr>
+            <td>{{ subject }}</td>
+            <td>{{ marks }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <a href="{{ url_for('show_student_totals') }}">&#8592; Back to List</a>
+
+</body>
+</html>
