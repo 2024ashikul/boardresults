@@ -13,14 +13,21 @@
   <meta name="robots" content="index, follow">
   <meta name="author" content="Board Result Chattogram">
 
-  <!-- Open Graph for social sharing -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZBQB48DQ4B"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-ZBQB48DQ4B');
+  </script>
   <meta property="og:title" content="Chattogram Board HSC Result 2025">
   <meta property="og:description" content="Find HSC student ranks, GPA, and total marks for Chattogram Board 2025.">
   <meta property="og:image" content="https://yourdomain.com/static/og-image.jpg">
   <meta property="og:url" content="https://yourdomain.com/results">
   <meta property="og:type" content="website">
 
-  <!-- Twitter Card -->
+
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Chattogram Board HSC Result 2025">
   <meta name="twitter:description" content="Explore student GPA, marks and ranks for HSC 2025 Chattogram Board.">
@@ -240,10 +247,14 @@
       <form method="get" id="filterForm"
         style="display: flex; flex-wrap: wrap; gap: 15px; align-items: center; width: 100%;">
         <div class="filter-radios">
-          <label><input type="radio" name="group" value="all" {% if selected_group=='all' %}checked{% endif %}> All</label>
-          <label><input type="radio" name="group" value="Science" {% if selected_group=='Science' %}checked{% endif %}> Science</label>
-          <label><input type="radio" name="group" value="Business Studies" {% if selected_group=='Business Studies' %}checked{% endif %}> Commerce</label>
-          <label><input type="radio" name="group" value="Humanities" {% if selected_group=='Humanities' %}checked{% endif %}> Humanities</label>
+          <label><input type="radio" name="group" value="all" {% if selected_group=='all' %}checked{% endif %}>
+            All</label>
+          <label><input type="radio" name="group" value="Science" {% if selected_group=='Science' %}checked{% endif %}>
+            Science</label>
+          <label><input type="radio" name="group" value="Business Studies" {% if selected_group=='Business Studies'
+              %}checked{% endif %}> Commerce</label>
+          <label><input type="radio" name="group" value="Humanities" {% if selected_group=='Humanities' %}checked{%
+              endif %}> Humanities</label>
         </div>
 
         <input type="text" name="roll" placeholder="Enter Roll" value="{{ search_roll }}" class="filter-search" />
@@ -283,49 +294,37 @@
     {% set start_page = page - half %}
     {% set end_page = page + half %}
 
-    {# Adjust if start_page < 1 #}
-    {% if start_page < 1 %}
-      {% set end_page = end_page + (1 - start_page) %}
-      {% set start_page = 1 %}
-    {% endif %}
-
-    {# Adjust if end_page > total_pages #}
-    {% if end_page > total_pages %}
+    {# Adjust if start_page < 1 #} {% if start_page < 1 %} {% set end_page=end_page + (1 - start_page) %} {% set
+      start_page=1 %} {% endif %} {# Adjust if end_page> total_pages #}
+      {% if end_page > total_pages %}
       {% set start_page = start_page - (end_page - total_pages) %}
-      {% if start_page < 1 %}
-        {% set start_page = 1 %}
-      {% endif %}
-      {% set end_page = total_pages %}
-    {% endif %}
-
-    {# Show first page and dots if needed #}
-    {% if start_page > 1 %}
-      <a class="page-link" href="?group={{ selected_group }}&page=1&roll={{ search_roll }}">1</a>
-      {% if start_page > 2 %}
+      {% if start_page < 1 %} {% set start_page=1 %} {% endif %} {% set end_page=total_pages %} {% endif %} {# Show
+        first page and dots if needed #} {% if start_page> 1 %}
+        <a class="page-link" href="?group={{ selected_group }}&page=1&roll={{ search_roll }}">1</a>
+        {% if start_page > 2 %}
         <span class="page-link">...</span>
-      {% endif %}
-    {% endif %}
+        {% endif %}
+        {% endif %}
 
-    {# Show page links from start_page to end_page #}
-    {% for p in range(start_page, end_page + 1) %}
-      {% if p == page %}
+        {# Show page links from start_page to end_page #}
+        {% for p in range(start_page, end_page + 1) %}
+        {% if p == page %}
         <span class="page-link current">{{ p }}</span>
-      {% else %}
+        {% else %}
         <a class="page-link" href="?group={{ selected_group }}&page={{ p }}&roll={{ search_roll }}">{{ p }}</a>
-      {% endif %}
-    {% endfor %}
+        {% endif %}
+        {% endfor %}
 
-    {# Show dots and last page if needed #}
-    {% if end_page < total_pages %}
-      {% if end_page < total_pages - 1 %}
-        <span class="page-link">...</span>
-      {% endif %}
-      <a class="page-link" href="?group={{ selected_group }}&page={{ total_pages }}&roll={{ search_roll }}">{{ total_pages }}</a>
-    {% endif %}
+        {# Show dots and last page if needed #}
+        {% if end_page < total_pages %} {% if end_page < total_pages - 1 %} <span class="page-link">...</span>
+          {% endif %}
+          <a class="page-link" href="?group={{ selected_group }}&page={{ total_pages }}&roll={{ search_roll }}">{{
+            total_pages }}</a>
+          {% endif %}
 
-    {% if page < total_pages %}
-    <a class="page-link" href="?group={{ selected_group }}&page={{ page + 1 }}&roll={{ search_roll }}">Next »</a>
-    {% endif %}
+          {% if page < total_pages %} <a class="page-link"
+            href="?group={{ selected_group }}&page={{ page + 1 }}&roll={{ search_roll }}">Next »</a>
+            {% endif %}
   </div>
 
   <table>
@@ -362,49 +361,37 @@
     {% set start_page = page - half %}
     {% set end_page = page + half %}
 
-    {# Adjust if start_page < 1 #}
-    {% if start_page < 1 %}
-      {% set end_page = end_page + (1 - start_page) %}
-      {% set start_page = 1 %}
-    {% endif %}
-
-    {# Adjust if end_page > total_pages #}
-    {% if end_page > total_pages %}
+    {# Adjust if start_page < 1 #} {% if start_page < 1 %} {% set end_page=end_page + (1 - start_page) %} {% set
+      start_page=1 %} {% endif %} {# Adjust if end_page> total_pages #}
+      {% if end_page > total_pages %}
       {% set start_page = start_page - (end_page - total_pages) %}
-      {% if start_page < 1 %}
-        {% set start_page = 1 %}
-      {% endif %}
-      {% set end_page = total_pages %}
-    {% endif %}
-
-    {# Show first page and dots if needed #}
-    {% if start_page > 1 %}
-      <a class="page-link" href="?group={{ selected_group }}&page=1&roll={{ search_roll }}">1</a>
-      {% if start_page > 2 %}
+      {% if start_page < 1 %} {% set start_page=1 %} {% endif %} {% set end_page=total_pages %} {% endif %} {# Show
+        first page and dots if needed #} {% if start_page> 1 %}
+        <a class="page-link" href="?group={{ selected_group }}&page=1&roll={{ search_roll }}">1</a>
+        {% if start_page > 2 %}
         <span class="page-link">...</span>
-      {% endif %}
-    {% endif %}
+        {% endif %}
+        {% endif %}
 
-    {# Show page links from start_page to end_page #}
-    {% for p in range(start_page, end_page + 1) %}
-      {% if p == page %}
+        {# Show page links from start_page to end_page #}
+        {% for p in range(start_page, end_page + 1) %}
+        {% if p == page %}
         <span class="page-link current">{{ p }}</span>
-      {% else %}
+        {% else %}
         <a class="page-link" href="?group={{ selected_group }}&page={{ p }}&roll={{ search_roll }}">{{ p }}</a>
-      {% endif %}
-    {% endfor %}
+        {% endif %}
+        {% endfor %}
 
-    {# Show dots and last page if needed #}
-    {% if end_page < total_pages %}
-      {% if end_page < total_pages - 1 %}
-        <span class="page-link">...</span>
-      {% endif %}
-      <a class="page-link" href="?group={{ selected_group }}&page={{ total_pages }}&roll={{ search_roll }}">{{ total_pages }}</a>
-    {% endif %}
+        {# Show dots and last page if needed #}
+        {% if end_page < total_pages %} {% if end_page < total_pages - 1 %} <span class="page-link">...</span>
+          {% endif %}
+          <a class="page-link" href="?group={{ selected_group }}&page={{ total_pages }}&roll={{ search_roll }}">{{
+            total_pages }}</a>
+          {% endif %}
 
-    {% if page < total_pages %}
-    <a class="page-link" href="?group={{ selected_group }}&page={{ page + 1 }}&roll={{ search_roll }}">Next »</a>
-    {% endif %}
+          {% if page < total_pages %} <a class="page-link"
+            href="?group={{ selected_group }}&page={{ page + 1 }}&roll={{ search_roll }}">Next »</a>
+            {% endif %}
   </div>
 
   <script>
@@ -420,6 +407,26 @@
       filterContainer.classList.toggle('active');
     });
   </script>
+  <script>
+    document.querySelectorAll('.student-row').forEach(row => {
+      row.addEventListener('click', () => {
+        const subjects = JSON.parse(row.dataset.subjects);
+        const tbody = document.querySelector('#subjectTable tbody');
+        tbody.innerHTML = '';
+
+        for (const [subject, mark] of Object.entries(subjects)) {
+          if (mark !== null && mark !== '') {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td>${subject}</td><td>${mark}</td>`;
+            tbody.appendChild(tr);
+          }
+        }
+
+        document.getElementById('subjectModal').style.display = 'block';
+      });
+    });
+  </script>
+
 
 </body>
 
