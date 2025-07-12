@@ -275,13 +275,13 @@
 
   <h2>Total Marks by Student</h2>
 
-  <div class="disclaimer">
+  <!-- <div class="disclaimer">
     <strong>Please note:</strong>
     <ol>
       <li>Everyone's marks are increased by <strong>150</strong> from the original marks.</li>
       
     </ol>
-  </div>
+  </div> -->
 
   <!-- Pagination BEFORE table -->
   <div class="pagination">
@@ -332,8 +332,10 @@
       <tr>
         <th>Rank</th>
         <th>Roll</th>
+        <th>Name</th>
         <th>Group</th>
         <th>GPA</th>
+        <th>Institute</th>
         <th>Total Marks</th>
       </tr>
     </thead>
@@ -342,12 +344,14 @@
   <tr 
   class="{% if student.roll == search_roll %}highlight{% endif %}" 
   style="cursor: pointer;"
-  onclick="window.location.href='/result/{{ student.roll }}';"
+   
 >
-  <td>{{ student.rank }}</td>
-  <td>{{ student.roll }}</td>
+  <td onclick="window.location.href='/result/{{ student.roll }}';" >{{ student.rank }}</td>
+  <td onclick="window.location.href='/result/{{ student.roll }}';" >{{ student.roll }}</td>
+  <td onclick="window.location.href='/result/{{ student.roll }}';" >{{ student.name }}</td>
   <td>{{ student.group }}</td>
   <td>{{ student.gpa }}</td>
+  <td onclick="window.location.href='/ins/{{ student.school_name }}';">{{ student.school_name }}</td>
   <td>{{ student.total_marks }}</td>
 </tr>
 

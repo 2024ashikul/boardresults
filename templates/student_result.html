@@ -69,11 +69,11 @@
 <body>
 
     <div class="student-info">
-        <h1>Result for Roll: {{ student.roll }}</h1>
+        <h1>Result for Roll: {{ student.roll_no }}</h1>
         <p><strong>GPA:</strong> {{ student.gpa }}</p>
         <p><strong>Group:</strong> {{ student.group }}</p>
-        <p><strong>School:</strong> {{ student.school_name }}</p>
-        <p><strong>Total Marks:</strong> {{ student.total_marks }}</p>
+        <p><strong>School:</strong> {{ student.institute }}</p>
+        <p><strong>Total Marks:</strong> {{ student.sum }}</p>
     </div>
 
     <h2>Subject-wise Marks</h2>
@@ -81,11 +81,15 @@
         <tr>
             <th>Subject</th>
             <th>Marks</th>
-        </tr>
-        {% for subject, marks in student.subject_marks.items() %}
+        </tr> 
+        {% for subject,marks in subjects.items() %}
         <tr>
-            <td>{{ subject }}</td>
-            <td>{{ marks }}</td>
+            <td>
+                {{subject}}
+            </td>
+            <td>
+                {{marks}}
+            </td>
         </tr>
         {% endfor %}
     </table>
