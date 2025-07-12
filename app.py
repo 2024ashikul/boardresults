@@ -53,7 +53,7 @@ def show_student_totals():
     marks_cols = [c for c in all_cols if c not in exclude_cols]
 
     # Get all student rows
-    cursor.execute("SELECT * FROM student")
+    cursor.execute("SELECT * FROM student where gpa = 5.0")
     rows = cursor.fetchall()
 
     students = []
