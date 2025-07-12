@@ -351,7 +351,7 @@
   <td onclick="window.location.href='/result/{{ student.roll }}';" >{{ student.name }}</td>
   <td>{{ student.group }}</td>
   <td>{{ student.gpa }}</td>
-  <td onclick="window.location.href='/ins/{{ student.school_name }}';">{{ student.school_name }}</td>
+  <td onclick="window.location.href='/ins/{{ student.school_name | urlencode }}';">{{ student.school_name }}</td>
   <td>{{ student.total_marks }}</td>
 </tr>
 
