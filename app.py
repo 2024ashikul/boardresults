@@ -212,5 +212,5 @@ def institute_result(school):
 def about():
     return render_template('about.htm')
 
-if __name__ == "__main__":
-    app.run()
+# if __name__ == "__main__":
+#     app.run()
