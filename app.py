@@ -53,7 +53,7 @@ def show_student_totals():
     marks_cols = [c for c in all_cols if c not in exclude_cols]
 
     # Get all student rows
-    cursor.execute("SELECT * FROM students WHERE gpa = 5.0")
+    cursor.execute("SELECT * FROM student WHERE gpa = 5.0")
     rows = cursor.fetchall()
 
     students = []
@@ -64,11 +64,11 @@ def show_student_totals():
         total = sum(float(row[col] or 0) for col in marks_cols)
 
         students.append({
-            'roll': row['roll'],
+            'roll': row['roll_no'],
             'gpa': row['gpa'],
-            'group': row['group_name'],
-            'school_name': row['school_name'],
-            'total_marks': round(total + 150, 2),
+            'group': row['type_of_result'],
+            'school_name': row['institute'],
+            'total_marks': row['sum'],
             'subject_marks': subject_marks
         })
 
